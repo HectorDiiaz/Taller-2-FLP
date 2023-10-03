@@ -1,0 +1,67 @@
+#lang racket
+;;fnc       ::= 'FNC <numero> (<and-exp>) 
+;;<and-exp> ::= <or-exp> {<or-exp>}*
+;;<or-exp>  ::= <number> {<number>}* 
+
+;;Constructores
+
+(define fnc
+  (lambda (n lista)
+  (cond
+    [(empty? lista) empty]
+    [else (append
+           (list 'FNC  n)
+           (list (list 'and-exp (and-exp lista))))]
+    )
+  ))
+
+(define or-exp
+  (
+   lambda(lista)
+    (cond
+      [(empty? lista) empty]
+      [(empty? (cdr lista)) ( list (car lista)) ]
+      [else (append
+             (list (car lista) 'OR) (or-exp (cdr lista)))]
+     )
+    ))
+
+(define and-exp
+  (
+   lambda(lista)
+    (cond
+      [(empty? lista) empty]
+      [(empty? (cdr lista)) ( list (or-exp (car lista)))]
+      [else (append
+             (list (or-exp (car lista)))
+             (and-exp (cdr lista)))]
+     )
+    ))
+
+;;EXTRACTORES:
+
+(define fnc->var
+  (lambda (list)
+    (cadr list)
+      ))
+
+(define fnc->clausulas
+  (lambda (lista)
+    (caddr lista)
+    )
+  )
+
+(define or->varlist
+  (lambda (lista)
+    (cond
+      [(empty? lista) empty]
+      [(equal? (car lista) 'OR) (or->varlist (cdr lista))]
+      [else (append (list (car lista)) (or->varlist (cdr lista)))]
+      )
+    )
+  )
+
+
+(define ejemplo (fnc 4 '((1 2 3) (5) (1 2 3))))
+
+;;(or->varlist '(1 OR 2 OR 3))
