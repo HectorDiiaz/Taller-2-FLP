@@ -1,5 +1,9 @@
 #lang eopl
-
+;;integrantes:
+;: Nicolas Garces Larrahondo 2180066
+;: Juan Pablo Ante 2140132
+;: Hector Diaz 2310001
+;:
 ;;exports
 (provide (all-defined-out))
 

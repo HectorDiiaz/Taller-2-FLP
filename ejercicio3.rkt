@@ -1,4 +1,9 @@
 #lang racket
+;;integrantes:
+;: Nicolas Garces Larrahondo 2180066
+;: Juan Pablo Ante 2140132
+;: Hector Diaz 2310001
+;:
 ;;imports
 (require "ejercicio1.rkt")
 (require "ejercicio2.rkt")
